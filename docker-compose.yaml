@@ -1,0 +1,10 @@
+services:
+  fastapi:
+    container_name: nefedov_planner_app
+    build:
+      context: ./
+      dockerfile: ./dockerfile
+    image: planner_app
+    ports:
+      - 8000:8000
+

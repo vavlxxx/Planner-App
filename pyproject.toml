@@ -1,0 +1,23 @@
+[project]
+name = "planner"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "vavlxxx",email = "vladimir.nefedov357@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi (>=0.120.2,<0.121.0)",
+    "uvicorn (>=0.38.0,<0.39.0)",
+    "pydantic[email] (>=2.12.3,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry]
+package-mode = false
