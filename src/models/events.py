@@ -20,7 +20,7 @@ class Event(BaseModel):
                 "description": "We will be discussing the contents of the FastAPI book in this event. Ensure to come with you own copy to win gifts!",
                 "tags": ["python", "fastapi", "book", "launch"],
                 "location": "Google Meet",
-                "user_id": 1
+                "user_id": 1,
             },
         }
     )
