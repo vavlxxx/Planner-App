@@ -1,0 +1,21 @@
+import sys
+from pathlib import Path
+
+from sqlmodel import SQLModel, Session, create_engine
+
+from src.database.models import Event, User
+
+sys.path.append(str(Path(__file__).parent.parent))
+
+database_file = "database.db"
+database_connection_string = f"sqlite:///{database_file}"
+connect_args = {"check_same_thread": False}
+engine_url = create_engine(database_connection_string, echo=True,connect_args=connect_args)
+
+
+def conn():
+    SQLModel.metadata.create_all(engine_url)
+
+def get_session():
+    with Session(engine_url) as session:
+        yield session

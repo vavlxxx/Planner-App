@@ -9,6 +9,7 @@ class Event(BaseModel):
     description: str
     tags: List[str]
     location: str
+    user_id: int
 
     model_config = ConfigDict(
         json_schema_extra={
@@ -18,7 +19,8 @@ class Event(BaseModel):
                 "image": "https://linktomyimage.com/image.png",
                 "description": "We will be discussing the contents of the FastAPI book in this event. Ensure to come with you own copy to win gifts!",
                 "tags": ["python", "fastapi", "book", "launch"],
-                "location": "Google Meet"
+                "location": "Google Meet",
+                "user_id": 1
             },
         }
     )
