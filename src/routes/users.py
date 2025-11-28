@@ -33,7 +33,9 @@ async def sign_user_in(user: UserSignIn, response: Response) -> User:
 
     if user.password == user.password:
         response.set_cookie(key="user_id", value=str(user.id))
-        return user
+        events = await EventMongo.find(EventMongo.user_id == str(user.id)).to_list()
+        events = [Event(**event.model_dump()) for event in events]
+        return User(**user.model_dump(), events=events)
 
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
