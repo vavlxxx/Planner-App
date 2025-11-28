@@ -1,13 +1,12 @@
-from pydantic import BaseModel, EmailStr, ConfigDict
+from pydantic import BaseModel, EmailStr, ConfigDict, model_validator
 from typing import Optional, List
+from beanie import Document
 from src.models.events import Event
 
 
-class User(BaseModel):
+class UserBase(BaseModel):
     email: EmailStr
     password: str
-    events: Optional[List[Event]] = None
-    
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
@@ -18,11 +17,25 @@ class User(BaseModel):
         }
     )
 
-            
+
+class User(UserBase):
+    id: str
+    events: Optional[List[Event]] = []
+
+    @model_validator(mode="before")
+    @classmethod
+    def serialize(cls, data) -> dict:
+        data["id"] = str(data["id"])
+        return data
+
+
+class UserMongo(UserBase, Document): ...
+
+
 class UserSignIn(BaseModel):
     email: EmailStr
     password: str
-    
+
     model_config = ConfigDict(
         json_schema_extra={
             "example": {

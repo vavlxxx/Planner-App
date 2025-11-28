@@ -7,4 +7,25 @@ services:
     image: planner_app
     ports:
       - 8000:8000
+    networks:
+      - planner_net
 
+    develop:
+      watch:
+        - action: rebuild
+          path: ./src
+          target: /app/src
+
+  mongodb:
+    container_name: nefedov_mongo_db
+    image: mongo
+    ports:
+      - 27017:27017 
+    volumes:
+      - "./storage:/data/db"
+    networks:
+      - planner_net
+      
+networks:
+  planner_net:
+    driver: bridge
