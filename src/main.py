@@ -4,15 +4,16 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
 from contextlib import asynccontextmanager
+
 import uvicorn
+from beanie import init_beanie
 from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
-from beanie import init_beanie
 
-from src.routes.users import user_router
-from src.routes.events import event_router
 from src.models.events import EventMongo
 from src.models.users import UserMongo
+from src.routes.events import event_router
+from src.routes.users import user_router
 
 _MONGO_DETAILS = "mongodb://nefedov_mongo_db:27017/"
 
